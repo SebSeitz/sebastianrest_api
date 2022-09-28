@@ -3,6 +3,7 @@ from pickle import NONE
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from datetime import date
 
 
 # Create your models here.
@@ -16,3 +17,7 @@ class Todo(models.Model):
         on_delete=models.CASCADE,
         default=NONE
     )
+    def time_passed(self):
+        today = date.today()
+        delta = today - self.created_at
+        return delta.days
